@@ -88,11 +88,7 @@ Aruba produces enterprise networking devices, mainly:
 | ArubaOS 10.x     | Fill from advisory  | Newer cloud-managed deployments |
 | AOS-CX / AOS-S   | Only if mentioned   | May not be affected             |
 
-### Quote / Evidence from the Advisory
 
-```text
-Paste the exact vulnerable version statement from the Aruba advisory here.
-```
 
 ### My Conclusion
 
