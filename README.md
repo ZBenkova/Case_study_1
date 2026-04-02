@@ -1,514 +1,105 @@
-# Case_study_1
-
-# Vulnerability Coverage Study Cases – Aruba a Arista
-
-> Pracovní poznámky k vyhodnocování zranitelností síťových zařízení.
->
-> Cíl: umět identifikovat výrobce, operační systém, verzi zařízení a porovnat je s informacemi v security advisory.
-
----
-
-# Study Case 1 – Aruba
-
-## 1. Rychlý průzkum Aruba
-
-### Jaké typy zařízení Aruba vyrábí
-
-Společnost Aruba (dnes součást HPE) vyrábí především:
-
-* Wi‑Fi access pointy
-* Switche
-* Gateway a controllery
-* SD‑WAN zařízení
-* Zařízení pro správu přístupu do sítě (NAC)
-* Cloud management platformy
-
-### Jak ovlivnila akvizice Aruba společností HPE zdroj informací o zranitelnostech
-
-Aruba byla koupena společností HPE. Z tohoto důvodu už nejsou informace o zranitelnostech publikovány pouze na původních Aruba stránkách, ale často na:
-
-* HPE Security Bulletin
-* HPE Support Center
-* Aruba Support Portal
-
-Praktický důsledek:
-
-* při hledání advisories je potřeba hledat jak „Aruba security advisory“, tak „HPE Aruba security bulletin“
-* některé starší odkazy vedou na Aruba web, novější advisories jsou často pod HPE
-
-### Používá Aruba jeden nebo více operačních systémů?
-
-Aruba nepoužívá jeden univerzální operační systém.
-
-Používá více OS podle typu zařízení:
-
-* ArubaOS / AOS-8
-* ArubaOS 10 / AOS-10
-* ArubaOS-CX
-* InstantOS
-
-Pro správné vyhodnocení zranitelnosti je potřeba vždy zjistit:
-
-1. model zařízení
-2. typ operačního systému
-3. konkrétní verzi OS
-
----
-
-## 2. Security Advisory
-
-> POZNÁMKA: V zadání chybí konkrétní odkaz na advisory. Níže je připraven postup a místo pro doplnění výsledků.
-
-### Advisory pokrývá:
-
-* [ ] jednu CVE
-* [ ] více CVE
-
-### Identifikované CVE
-
-* CVE-........
-* CVE-........
-
-### Dotčené operační systémy
-
-| Operační systém | Zranitelné verze         |
-| --------------- | ------------------------ |
-| AOS-8           | doplnit podle advisory   |
-| AOS-10          | doplnit podle advisory   |
-| ArubaOS-CX      | doplnit pokud je uvedeno |
-
-### Evidence
-
-Do poznámek vložit citaci z advisory, například:
-
-```text
-„Affected versions: ArubaOS 10.7.x prior to 10.7.0.2“
-```
-
-Zdroj:
-
-* vložit odkaz na advisory
-
----
-
-## 3. Výběr CLI příkazu
-
-Cílem je získat model zařízení a verzi operačního systému.
-
-### AOS-8
-
-Vybraný příkaz:
-
-```text
-show version
-```
-
-Důvod:
-
-* vypisuje model zařízení
-* vypisuje verzi ArubaOS
-* poskytuje dostatek informací pro porovnání s advisory
-
-Příklad očekávaného výstupu:
-
-```text
-ArubaOS Version 8.x.x.x
-MODEL: Aruba7005
-```
-
-### AOS-10
-
-Vybraný příkaz:
-
-```text
-show version
-```
-
-nebo
-
-```text
-show inventory
-```
-
-Důvod:
-
-* „show version“ většinou obsahuje verzi OS
-* „show inventory“ může pomoci ověřit přesný model zařízení
-
-Příklad:
-
-```text
-ArubaOS Version 10.7.0.1
-MODEL: Aruba7005
-```
-
-### Proč je tento příkaz vhodný
-
-Security advisory obvykle obsahuje:
-
-* seznam zranitelných modelů
-* seznam zranitelných verzí
-
-Proto je právě kombinace „model + verze“ nejdůležitější.
-
----
-
-## 4. SNMP – základní informace
-
-### Jaké typy požadavků SNMP podporuje
-
-SNMP podporuje zejména:
-
-* GET – získání hodnoty
-* GETNEXT – získání další hodnoty v MIB stromu
-* GETBULK – získání více hodnot najednou
-* SET – změna hodnoty
-* TRAP – zařízení samo odešle upozornění
-* INFORM – potvrzené upozornění
-
-### Co je OID
-
-OID (Object Identifier) je jednoznačný identifikátor určité informace v SNMP stromu.
-
-Například:
-
-```text
-1.3.6.1.2.1.1.1
-```
-
-odpovídá sysDescr.
-
-### Existuje OID pro získání systémového popisu zařízení?
-
-Ano.
-
-```text
-sysDescr = 1.3.6.1.2.1.1.1.0
-```
-
-Tento OID často vrací:
-
-* výrobce
-* model
-* verzi operačního systému
-
-### Jaký port používá SNMP standardně
-
-* UDP 161 – běžné dotazy
-* UDP 162 – trap zprávy
-
----
-
-## 5. Vyhodnocení SNMP výstupu
-
-Výstup:
-
-```text
+Vulnerability coverage study cases
+These study cases train reasoning around vulnerability management on network devices.
+The goal of this exercise is to:
+When asked to answer questions: support by evidence (screenshots, quotes, links).
+Decisions: support them with reasoning and provide alternate options.
+When something is assumed, mark it clearly.
+What to watch out for:
+Guesses and unmarked assumptions,
+Answers without any evidence.
+Decisions without logical reasoning chain.
+Study Case 1
+You will investigate a vulnerability of an Aruba asset in this case.
+Estimated time required for this study case: 45 minutes.
+Step 1: Initial Research 
+Start with a fast research of Aruba. Below you can see example information that may be interesting for this case study.
+What types of network devices does Aruba produce?
+How could HPE’s acquisition of Aruba affect the source of vulnerability information?
+Does Aruba develop one or multiple operating systems for their products?
+You may use the website of the vendor, other relevant websites, official Youtube channel, AI, or any other resource you will find relevant to perform the research.
+Step 2: Security Advisory
+Open the web advisory from this link. Gather the following information:
+Does this advisory cover one or multiple CVE(s)?
+What operating systems and operating system versions are affected by the vulnerability/vulnerabilities?
+Step 3: Command Selection
+The documentation for both AOS-8 and AOS-10 contain a list of commands available using the command line interface (CLI). The commands for AOS-8 are available here. The commands for AOS-10 are available here.
+Select one command for each OS which would provide evidence about the vulnerability of an asset. Look for commands that reveal software version and model. (Hint: You are interested in version information.)
+Read the example outputs of commands you consider. The example outputs are included in the documentation. Check if the command really includes an operating system version.
+Step 4: Gathering Information Using SNMP
+Using CLI usually requires providing SSH credentials. However, there are alternative protocols that may be used, such as SNMP. Do quick research on the SNMP protocol. Your research should focus on the following questions:
+What types of requests does SNMP support?
+What is OID?
+Is there a specific OID focused on gathering the system description of a product?
+What port number is used by SNMP by default?
+Step 5: Reading SNMP Information
+Below you can see an output provided by Aruba asset after sending GET request to sysDescr OID (1.3.6.1.2.1.1.1)
 ArubaOS (MODEL: Aruba7005), Version 10.7.0.1 SSR (91033)
-```
-
-### Co z výstupu zjistím
-
-* výrobce / OS: ArubaOS
-* model: Aruba7005
-* verze: 10.7.0.1
-
-### Lze z toho určit, zda je zařízení zranitelné?
-
-Ano, ale pouze po porovnání s advisory.
-
-Možné scénáře:
-
-* pokud advisory uvádí, že jsou zranitelné verze například do 10.7.0.1 včetně, zařízení je pravděpodobně zranitelné
-* pokud advisory uvádí, že opravená verze je od 10.7.0.2, zařízení s verzí 10.7.0.1 je stále zranitelné
-* pokud advisory uvádí, že zranitelné jsou pouze verze 8.x, zařízení není zranitelné
-
-### Evidence
-
-```text
-Model: Aruba7005
-Version: 10.7.0.1
-```
-
-Toto je dostatečný důkaz pro porovnání s advisory.
-
----
-
-## 6. Závěr
-
-### Jaké zdroje lze použít k identifikaci výrobce a OS zařízení
-
-| Zdroj                   | Co zjistím               | Vyžaduje přihlašovací údaje? | Spolehlivost                 |
-| ----------------------- | ------------------------ | ---------------------------- | ---------------------------- |
-| SNMP sysDescr           | výrobce, model, verze OS | ne vždy                      | rychlé, ale nemusí být úplné |
-| CLI show version        | model, OS, verze         | ano                          | nejspolehlivější             |
-| Web management rozhraní | model, verze             | ano                          | dobré                        |
-| Banner služby           | někdy výrobce / verze    | ne                           | méně spolehlivé              |
-| MAC adresa / OUI        | výrobce                  | ne                           | jen výrobce                  |
-
-### Nejrychlejší zdroj
-
-SNMP sysDescr.
-
-### Nejspolehlivější zdroj
-
-CLI příkaz `show version`.
-
-### Který zdroj vyžaduje credentials
-
-CLI a web management.
-
-### Postup pro ověření známé zranitelnosti
-
-1. zjistit výrobce
-2. zjistit model zařízení
-3. zjistit OS a verzi
-4. otevřít vendor security advisory
-5. porovnat model a verzi s affected versions
-6. ověřit, zda nejsou potřeba další podmínky (například zapnutá konkrétní služba)
-7. navrhnout mitigaci nebo upgrade
-
----
-
----
-
-# Study Case 2 – Arista
-
-## Part 1
-
-## 1. Rychlý průzkum Arista
-
-### Jaké typy zařízení Arista vyrábí
-
-Arista vyrábí hlavně:
-
-* datacentrové switche
-* routery
-* cloud networking zařízení
-* síťová zařízení pro enterprise prostředí
-
-### Co je EOS
-
-EOS = Extensible Operating System.
-
-Jde o operační systém Arista zařízení založený na Linuxu.
-
-### Kde Arista publikuje security advisories
-
-Arista advisories bývají na:
-
-* Arista Security Advisories
-* Arista Product Security Center
-
----
-
-## 2. Security Advisory
-
-> V zadání chybí konkrétní odkaz na advisory pro CVE-2025-8872. Níže je připraven prostor pro doplnění.
-
-### CVE
-
-```text
-CVE-2025-8872
-```
-
-### Zranitelné EOS verze
-
-| EOS verze              | Stav       |
-| ---------------------- | ---------- |
-| doplnit podle advisory | vulnerable |
-| doplnit podle advisory | fixed      |
-
-### Dotčené hardware řady
-
-* DCS-....
-* 7050X
-* 7150S
-* ...
-
-### Je potřeba speciální konfigurace?
-
-* [ ] Ano
-* [ ] Ne
-
-Pokud ano, doplnit:
-
-```text
-Například musí být zapnutá konkrétní služba, protokol nebo feature.
-```
-
-### Zmíněný síťový protokol
-
-* doplnit podle advisory
-
-### Doporučená mitigace
-
-* upgrade EOS
-* vypnutí zranitelné služby
-* ACL / omezení přístupu
-
----
-
-## 3. Analýza výstupu show version
-
-Výstup:
-
-```text
+Evaluate the command output. Does it provide evidence suggesting the asset is (not) vulnerable?
+Step 6: Conclusion and Discussion
+Summarize the knowledge you gained during the study case.
+If you are given a network asset, which sources can be used to identify the vendor of the asset and operating system running on the asset? Which source is the quickest? Which one is most reliable? Which one requires credentials?
+If you identify the vendor and OS, list the steps to check whether the asset has a known vulnerability.
+Study Case 2
+You will investigate a vulnerability of an Arista asset in this study case.
+Part 1
+Estimated time required for this part: 60 minutes.
+Step 1: Initial Research 
+Start with a fast research of Arista. Below you can see example information that may be interesting for this case study.
+What type of devices does Arista produce?
+What is EOS?
+Where are security advisories published?
+Step 2: Security Advisory
+Open the web advisory from this link. Gather the following information:
+CVE-ID of the vulnerability described in the advisory.
+What EOS versions are considered to be vulnerable?
+What hardware products are considered to be vulnerable?
+Does the vulnerability require specific configuration of the asset to be exploited? Or is every asset with the specified EOS version and from the specific product series always vulnerable?
+What network protocol is mentioned in the advisory?
+Does the advisory provide guidance to resolve/mitigate the vulnerability?
+Step 3: Version output
+Below you can see an example output of the show version command run on an Arista asset. Read the output.
+switch> show version
 Arista DCS-7150S-64-CL-F
+Hardware version:    01.01
+Serial number:       JPE13120819
+System MAC address:  001c.7326.fd0c
+
 Software image version: 4.32.2F
-Architecture: i386
-```
+Architecture:           i386
+Internal build version: 4.32.2F-1649184.4132F.2
+Internal build ID:      eeb3c212-b4bd-4c19-ba34-1b0aa36e43f1
 
-### Relevantní informace
+Uptime:                 16 hours and 39 minutes
+Total memory:           4017088 kB
+Free memory:            1348228 kB
+Answer the following questions:
+What pieces of information are relevant to evaluate whether the asset is potentially vulnerable to CVE-2025-8872.
+What pieces of information are irrelevant?
+What pieces of information are potentially relevant? What additional research would be required?
+If you identify pieces of information that would require additional research, identify the piece which you consider as the most relevant. Plan the research and perform it.
+We recommend using text highlighting to mark relevant, irrelevant, and potentially relevant information.
+Step 4: Vulnerability Evaluation
+From what you have already learned, summarize the information:
+Evidence that suggests that the asset is vulnerable.
+Evidence that suggests that the asset is not vulnerable.
+Evidence that is not available at the moment.
+Step 5: Conclusion
+If you have a vulnerable asset in a company network, what quick solution would you propose to handle this vulnerability? And what long-term solution would you propose to handle similar vulnerabilities in the future?
+If you don’t have a vulnerable asset in a company network, what preemptive measure would you propose to handle this vulnerability in the future?
+Part 2
+Estimated time required for this part: 30 minutes.
+Step 1: Additional information about CVE
+Open vulnerability database of vulnerability scanner vendors, for example Rapid7 VulnDB and Tenable CVE database. Try to search for the CVE of the vulnerability. Have you learned any new information?
+Check if this vulnerability is exploited in the wild using Known Exploited Vulnerabilities Catalog. What would it mean if it was?
+Step 2: New Security Advisory
+You will investigate another vulnerability of an Arista asset in this task. This task is similar to the previous one but it is focused on a different vulnerability.
+Open the web advisory from the following link. Gather the following information:
+What EOS versions are considered to be vulnerable?
+What hardware products are considered to be vulnerable?
+Read the output of the show version command again. In the previous vulnerability, you have identified the relevant, irrelevant, and potentially relevant pieces of information. Does this still hold for this advisory as well? If not, what changes need to be made?
+From what you have already learned, summarize the information:
+Evidence that suggests that the asset is vulnerable.
+Evidence that suggests that the asset is not vulnerable.
+Evidence that is not available at the moment.
+Based on your investigation, what action would you recommend to handle the vulnerability?
 
-* `Arista DCS-7150S-64-CL-F`
-
-  * důležité pro porovnání s affected hardware
-
-* `Software image version: 4.32.2F`
-
-  * nejdůležitější údaj
-  * porovnává se s vulnerable / fixed verzemi
-
-### Potenciálně relevantní informace
-
-* `Architecture: i386`
-
-  * může být relevantní pouze pokud advisory uvádí, že je zranitelnost omezená na konkrétní architekturu
-  * nutné ověřit v advisory
-
-* `Internal build version`
-
-  * může být užitečný, pokud advisory rozlišuje buildy stejné verze
-
-### Irrelevantní informace
-
-* Serial number
-* System MAC address
-* Uptime
-* Total memory
-* Free memory
-
-Tyto údaje běžně neovlivňují, zda je zařízení zranitelné.
-
-### Nejrelevantnější údaj pro další průzkum
-
-```text
-Software image version: 4.32.2F
-```
-
-### Plán dalšího ověření
-
-1. otevřít advisory
-2. zjistit affected versions
-3. porovnat, zda 4.32.2F spadá do seznamu
-4. ověřit, zda model 7150S patří mezi affected hardware
-5. ověřit, zda je vyžadována konkrétní konfigurace
-
----
-
-## 4. Vyhodnocení zranitelnosti
-
-### Evidence, že zařízení je zranitelné
-
-Zařízení je pravděpodobně zranitelné, pokud:
-
-* model `DCS-7150S-64-CL-F` je uveden mezi affected products
-* verze `4.32.2F` je uvedena mezi vulnerable versions
-* jsou splněny případné další podmínky z advisory
-
-### Evidence, že zařízení není zranitelné
-
-Zařízení pravděpodobně není zranitelné, pokud:
-
-* model není mezi affected products
-* verze je novější než fixed version
-* není zapnutá požadovaná služba
-
-### Evidence, která zatím chybí
-
-* konkrétní advisory
-* seznam affected versions
-* informace, zda je aktivní potřebná služba / protokol
-
----
-
-## 5. Návrh řešení
-
-### Krátkodobé řešení
-
-* omezit přístup k postižené službě
-* použít ACL nebo firewall
-* vypnout zranitelnou funkci
-* naplánovat upgrade co nejdříve
-
-### Dlouhodobé řešení
-
-* zavést pravidelné sledování vendor advisories
-* inventarizovat zařízení a verze OS
-* pravidelně skenovat zranitelnosti
-* mít patch management proces
-
-### Preventivní opatření
-
-Pokud zařízení aktuálně není zranitelné:
-
-* nastavit monitoring nových advisories
-* evidovat verze zařízení
-* před upgradem ověřovat kompatibilitu a bezpečnostní opravy
-
----
-
-# Part 2 – Další průzkum CVE
-
-## 1. Rapid7 / Tenable / KEV
-
-### Rapid7 a Tenable
-
-Při hledání CVE je vhodné zkontrolovat:
-
-* CVSS skóre
-* detailnější popis útoku
-* exploitability
-* odkazy na workaround
-
-### KEV – Known Exploited Vulnerabilities
-
-Pokud by bylo CVE v KEV katalogu, znamenalo by to:
-
-* zranitelnost je aktivně zneužívána
-* priorita opravy by byla velmi vysoká
-* zařízení by mělo být opraveno okamžitě
-
----
-
-## 2. Druhé Arista advisory
-
-> Opět chybí konkrétní odkaz. Po doplnění advisory zopakovat stejný postup.
-
-### Zranitelné verze EOS
-
-| Verze   | Stav       |
-| ------- | ---------- |
-| doplnit | vulnerable |
-| doplnit | fixed      |
-
-### Dotčený hardware
-
-* doplnit
-
-### Změna relevance údajů ze show version
-
-Ve většině případů zůstává nejdůležitější:
-
-* model zařízení
-* Software image version
-
-Další údaje mohou být relevantní pouze tehdy, pokud advisory pracuje s konkrétní architekturou, buildem nebo konfigurací.
-
-### Doporučená akce
-
-* ověřit verzi
-* ověřit model
-* provést upgrade na fix verzi
-* pokud upgrade není možný, aplikovat mitigaci z advisory
