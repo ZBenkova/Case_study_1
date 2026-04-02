@@ -17,12 +17,6 @@
 
 ### What types of network devices does Aruba produce?
 
-**Notes:**
-
-*
-*
-*
-
 ### How could HPE’s acquisition of Aruba affect the source of vulnerability information?
 
 **Notes:**
@@ -257,16 +251,13 @@ ArubaOS (MODEL: Aruba7005), Version 10.7.0.1 SSR (91033)
 
 **Notes:**
 
-*
-*
-*
+
+Arista Networks produces high-performance, software-driven networking hardware and software, specializing in data center switches, campus networking, and routers.
 
 ### What is EOS?
 
 **Notes:**
-
-*
-*
+Arista Extensible Operating System (EOS®) is a modern, highly modular, Linux-based network operating system designed for data centers and cloud networks
 
 ### Where are security advisories published?
 
