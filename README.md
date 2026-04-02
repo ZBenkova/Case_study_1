@@ -1,63 +1,348 @@
-Vulnerability coverage study cases
-These study cases train reasoning around vulnerability management on network devices.
-The goal of this exercise is to:
-When asked to answer questions: support by evidence (screenshots, quotes, links).
-Decisions: support them with reasoning and provide alternate options.
-When something is assumed, mark it clearly.
-What to watch out for:
-Guesses and unmarked assumptions,
-Answers without any evidence.
-Decisions without logical reasoning chain.
-Study Case 1
-You will investigate a vulnerability of an Aruba asset in this case.
-Estimated time required for this study case: 45 minutes.
-Step 1: Initial Research 
-Start with a fast research of Aruba. Below you can see example information that may be interesting for this case study.
-What types of network devices does Aruba produce?
-How could HPE’s acquisition of Aruba affect the source of vulnerability information?
-Does Aruba develop one or multiple operating systems for their products?
-You may use the website of the vendor, other relevant websites, official Youtube channel, AI, or any other resource you will find relevant to perform the research.
-Step 2: Security Advisory
-Open the web advisory from this link. Gather the following information:
-Does this advisory cover one or multiple CVE(s)?
-What operating systems and operating system versions are affected by the vulnerability/vulnerabilities?
-Step 3: Command Selection
-The documentation for both AOS-8 and AOS-10 contain a list of commands available using the command line interface (CLI). The commands for AOS-8 are available here. The commands for AOS-10 are available here.
-Select one command for each OS which would provide evidence about the vulnerability of an asset. Look for commands that reveal software version and model. (Hint: You are interested in version information.)
-Read the example outputs of commands you consider. The example outputs are included in the documentation. Check if the command really includes an operating system version.
-Step 4: Gathering Information Using SNMP
-Using CLI usually requires providing SSH credentials. However, there are alternative protocols that may be used, such as SNMP. Do quick research on the SNMP protocol. Your research should focus on the following questions:
-What types of requests does SNMP support?
-What is OID?
-Is there a specific OID focused on gathering the system description of a product?
-What port number is used by SNMP by default?
-Step 5: Reading SNMP Information
-Below you can see an output provided by Aruba asset after sending GET request to sysDescr OID (1.3.6.1.2.1.1.1)
+# Vulnerability Coverage Study Cases – Aruba & Arista
+
+> Working notes template for investigating vulnerabilities on network devices.
+>
+> Goal:
+>
+> * support answers with evidence
+> * clearly separate facts from assumptions
+> * explain the reasoning behind decisions
+> * leave space for my own findings and screenshots
+
+---
+
+# Study Case 1 – Aruba
+
+## Step 1: Initial Research
+
+### What types of network devices does Aruba produce?
+
+**Notes:**
+
+*
+*
+*
+
+### How could HPE’s acquisition of Aruba affect the source of vulnerability information?
+
+**Notes:**
+
+*
+*
+*
+
+### Does Aruba develop one or multiple operating systems for their products?
+
+**Notes:**
+
+* Operating system:
+* Used for:
+* Additional OS:
+
+### Sources Used
+
+* Link:
+* Link:
+* Link:
+
+---
+
+## Step 2: Security Advisory
+
+### Advisory Link
+
+*
+
+### Does this advisory cover one or multiple CVEs?
+
+* [ ] One CVE
+* [ ] Multiple CVEs
+
+### Identified CVEs
+
+* CVE-
+* CVE-
+
+### Affected Operating Systems and Versions
+
+| Operating System | Vulnerable Versions | Notes |
+| ---------------- | ------------------- | ----- |
+|                  |                     |       |
+|                  |                     |       |
+|                  |                     |       |
+
+### Quote / Evidence from the Advisory
+
+```text
+paste quote here
+```
+
+### My Conclusion
+
+*
+*
+
+---
+
+## Step 3: Command Selection
+
+### AOS-8
+
+**Selected command:**
+
+```text
+```
+
+**Why this command is useful:**
+
+*
+*
+
+**Does it include the device model?**
+
+* [ ] Yes
+* [ ] No
+
+**Does it include the OS version?**
+
+* [ ] Yes
+* [ ] No
+
+**Relevant output example:**
+
+```text
+```
+
+### AOS-10
+
+**Selected command:**
+
+```text
+```
+
+**Why this command is useful:**
+
+*
+*
+
+**Does it include the device model?**
+
+* [ ] Yes
+* [ ] No
+
+**Does it include the OS version?**
+
+* [ ] Yes
+* [ ] No
+
+**Relevant output example:**
+
+```text
+```
+
+---
+
+## Step 4: Gathering Information Using SNMP
+
+### What request types does SNMP support?
+
+| Request Type | Purpose |
+| ------------ | ------- |
+|              |         |
+|              |         |
+|              |         |
+
+### What is an OID?
+
+**Notes:**
+
+*
+*
+
+### Is there a specific OID focused on gathering the system description of a product?
+
+* Name:
+* OID:
+* What it returns:
+
+### What port number is used by SNMP by default?
+
+* Requests:
+* Trap messages:
+
+---
+
+## Step 5: Reading SNMP Information
+
+Output:
+
+```text
 ArubaOS (MODEL: Aruba7005), Version 10.7.0.1 SSR (91033)
-Evaluate the command output. Does it provide evidence suggesting the asset is (not) vulnerable?
-Step 6: Conclusion and Discussion
-Summarize the knowledge you gained during the study case.
-If you are given a network asset, which sources can be used to identify the vendor of the asset and operating system running on the asset? Which source is the quickest? Which one is most reliable? Which one requires credentials?
-If you identify the vendor and OS, list the steps to check whether the asset has a known vulnerability.
-Study Case 2
-You will investigate a vulnerability of an Arista asset in this study case.
-Part 1
-Estimated time required for this part: 60 minutes.
-Step 1: Initial Research 
-Start with a fast research of Arista. Below you can see example information that may be interesting for this case study.
-What type of devices does Arista produce?
-What is EOS?
-Where are security advisories published?
-Step 2: Security Advisory
-Open the web advisory from this link. Gather the following information:
-CVE-ID of the vulnerability described in the advisory.
-What EOS versions are considered to be vulnerable?
-What hardware products are considered to be vulnerable?
-Does the vulnerability require specific configuration of the asset to be exploited? Or is every asset with the specified EOS version and from the specific product series always vulnerable?
-What network protocol is mentioned in the advisory?
-Does the advisory provide guidance to resolve/mitigate the vulnerability?
-Step 3: Version output
-Below you can see an example output of the show version command run on an Arista asset. Read the output.
+```
+
+### What information can be extracted from the output?
+
+| Item        | Value |
+| ----------- | ----- |
+| Vendor / OS |       |
+| Model       |       |
+| Version     |       |
+
+### Does the output provide evidence that the asset is vulnerable?
+
+* [ ] Yes
+* [ ] No
+* [ ] Cannot determine without the advisory
+
+### Reasoning
+
+*
+*
+*
+
+### What additional information is still missing?
+
+*
+*
+
+---
+
+## Step 6: Conclusion and Discussion
+
+### Knowledge gained from this study case
+
+*
+*
+*
+
+### Which sources can be used to identify the vendor and operating system of a network asset?
+
+| Source | What it provides | Requires credentials? | Reliability |
+| ------ | ---------------- | --------------------- | ----------- |
+|        |                  |                       |             |
+|        |                  |                       |             |
+|        |                  |                       |             |
+
+### Which source is the quickest?
+
+*
+
+### Which source is the most reliable?
+
+*
+
+### Which source requires credentials?
+
+*
+
+### Steps to check whether the asset has a known vulnerability
+
+1.
+2.
+3.
+4.
+5.
+
+---
+
+---
+
+# Study Case 2 – Arista
+
+# Part 1
+
+## Step 1: Initial Research
+
+### What type of devices does Arista produce?
+
+**Notes:**
+
+*
+*
+*
+
+### What is EOS?
+
+**Notes:**
+
+*
+*
+
+### Where are security advisories published?
+
+**Notes:**
+
+*
+*
+
+### Sources Used
+
+*
+*
+*
+
+---
+
+## Step 2: Security Advisory
+
+### Advisory Link
+
+*
+
+### CVE-ID
+
+```text
+CVE-
+```
+
+### What EOS versions are considered vulnerable?
+
+| EOS Version | Status     |
+| ----------- | ---------- |
+|             | Vulnerable |
+|             | Fixed      |
+
+### What hardware products are affected?
+
+*
+*
+*
+
+### Does exploitation require a specific configuration?
+
+* [ ] Yes
+* [ ] No
+
+**If yes, what configuration is required?**
+
+*
+*
+
+### What network protocol is mentioned in the advisory?
+
+*
+
+### Does the advisory provide mitigation or remediation guidance?
+
+* [ ] Yes
+* [ ] No
+
+**If yes, what guidance is provided?**
+
+*
+*
+
+### Quote / Evidence from the Advisory
+
+```text
+paste quote here
+```
+
+---
+
+## Step 3: Version Output Analysis
+
+```text
 switch> show version
 Arista DCS-7150S-64-CL-F
 Hardware version:    01.01
@@ -72,34 +357,182 @@ Internal build ID:      eeb3c212-b4bd-4c19-ba34-1b0aa36e43f1
 Uptime:                 16 hours and 39 minutes
 Total memory:           4017088 kB
 Free memory:            1348228 kB
-Answer the following questions:
-What pieces of information are relevant to evaluate whether the asset is potentially vulnerable to CVE-2025-8872.
-What pieces of information are irrelevant?
-What pieces of information are potentially relevant? What additional research would be required?
-If you identify pieces of information that would require additional research, identify the piece which you consider as the most relevant. Plan the research and perform it.
-We recommend using text highlighting to mark relevant, irrelevant, and potentially relevant information.
-Step 4: Vulnerability Evaluation
-From what you have already learned, summarize the information:
-Evidence that suggests that the asset is vulnerable.
-Evidence that suggests that the asset is not vulnerable.
-Evidence that is not available at the moment.
-Step 5: Conclusion
-If you have a vulnerable asset in a company network, what quick solution would you propose to handle this vulnerability? And what long-term solution would you propose to handle similar vulnerabilities in the future?
-If you don’t have a vulnerable asset in a company network, what preemptive measure would you propose to handle this vulnerability in the future?
-Part 2
-Estimated time required for this part: 30 minutes.
-Step 1: Additional information about CVE
-Open vulnerability database of vulnerability scanner vendors, for example Rapid7 VulnDB and Tenable CVE database. Try to search for the CVE of the vulnerability. Have you learned any new information?
-Check if this vulnerability is exploited in the wild using Known Exploited Vulnerabilities Catalog. What would it mean if it was?
-Step 2: New Security Advisory
-You will investigate another vulnerability of an Arista asset in this task. This task is similar to the previous one but it is focused on a different vulnerability.
-Open the web advisory from the following link. Gather the following information:
-What EOS versions are considered to be vulnerable?
-What hardware products are considered to be vulnerable?
-Read the output of the show version command again. In the previous vulnerability, you have identified the relevant, irrelevant, and potentially relevant pieces of information. Does this still hold for this advisory as well? If not, what changes need to be made?
-From what you have already learned, summarize the information:
-Evidence that suggests that the asset is vulnerable.
-Evidence that suggests that the asset is not vulnerable.
-Evidence that is not available at the moment.
-Based on your investigation, what action would you recommend to handle the vulnerability?
+```
 
+### Relevant Information
+
+| Information | Why it is relevant |
+| ----------- | ------------------ |
+|             |                    |
+|             |                    |
+
+### Potentially Relevant Information
+
+| Information | What additional research is required |
+| ----------- | ------------------------------------ |
+|             |                                      |
+|             |                                      |
+
+### Irrelevant Information
+
+| Information | Why it is not relevant |
+| ----------- | ---------------------- |
+|             |                        |
+|             |                        |
+
+### Most Important Information for Further Research
+
+*
+
+### Research Plan
+
+1.
+2.
+3.
+4.
+
+---
+
+## Step 4: Vulnerability Evaluation
+
+### Evidence suggesting that the asset is vulnerable
+
+*
+*
+*
+
+### Evidence suggesting that the asset is not vulnerable
+
+*
+*
+*
+
+### Evidence that is not currently available
+
+*
+*
+
+### Assumptions
+
+> Clearly mark anything that has not been confirmed.
+
+* Assumption:
+* Reason:
+
+---
+
+## Step 5: Conclusion
+
+### If the asset is vulnerable, what quick solution would I propose?
+
+*
+*
+*
+
+### What long-term solution would I propose for similar vulnerabilities in the future?
+
+*
+*
+*
+
+### If the asset is not currently vulnerable, what preventive measure would I propose?
+
+*
+*
+
+---
+
+# Part 2
+
+## Step 1: Additional Information About the CVE
+
+### Rapid7 / Tenable
+
+**What new information did I learn?**
+
+*
+*
+*
+
+### KEV – Known Exploited Vulnerabilities
+
+* [ ] The CVE is listed in KEV
+* [ ] The CVE is not listed in KEV
+
+### What would it mean if the CVE was listed in KEV?
+
+*
+*
+
+---
+
+## Step 2: New Arista Security Advisory
+
+### Advisory Link
+
+*
+
+### What EOS versions are vulnerable?
+
+| EOS Version | Status     |
+| ----------- | ---------- |
+|             | Vulnerable |
+|             | Fixed      |
+
+### What hardware is affected?
+
+*
+*
+*
+
+### Does the same classification of `show version` information still apply?
+
+* [ ] Yes
+* [ ] No
+
+### If not, what changes?
+
+| Information | New Classification | Reason |
+| ----------- | ------------------ | ------ |
+|             |                    |        |
+|             |                    |        |
+
+### Evidence suggesting that the asset is vulnerable
+
+*
+*
+
+### Evidence suggesting that the asset is not vulnerable
+
+*
+*
+
+### What information is still missing?
+
+*
+*
+
+### Recommended Action
+
+*
+*
+*
+
+---
+
+# Final Notes
+
+### What was the most difficult part of the investigation?
+
+*
+*
+
+### What information was the easiest to obtain?
+
+*
+*
+
+### What would I do differently next time?
+
+*
+*
