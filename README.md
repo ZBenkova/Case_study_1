@@ -16,7 +16,6 @@
 ## Step 1: Initial Research
 
 ### What types of network devices does Aruba produce?
-
 ### How could HPE’s acquisition of Aruba affect the source of vulnerability information?
 
 **Notes:**
@@ -250,26 +249,27 @@ ArubaOS (MODEL: Aruba7005), Version 10.7.0.1 SSR (91033)
 ### What type of devices does Arista produce?
 
 **Notes:**
-
-
+*
 Arista Networks produces high-performance, software-driven networking hardware and software, specializing in data center switches, campus networking, and routers.
 
+The company delivers products across the data center and campus with routing and software solutions for monitoring and network detection and response worldwide. 
+
+https://www.arista.com/en/company/company-overview#:~:text=The%20company%20delivers%20products%20across,has%20offices%20around%20the%20world.
+
+*
 ### What is EOS?
 
 **Notes:**
+*
 Arista Extensible Operating System (EOS®) is a modern, highly modular, Linux-based network operating system designed for data centers and cloud networks
-
+https://www.arista.com/en/products/eos
+*
 ### Where are security advisories published?
 
 **Notes:**
 
-*
-*
-
-### Sources Used
-
-*
-*
+*Arista security advisories are officially published on the Arista website under the Support > Advisories & Notices > Security Advisory section.
+official website - https://www.arista.com/en/support/advisories-notices
 *
 
 ---
@@ -280,38 +280,69 @@ Arista Extensible Operating System (EOS®) is a modern, highly modular, Linux-ba
 
 *
 
+
 ### CVE-ID
 
-```text
-CVE-
+``` CVE-2025-8872
 ```
 
 ### What EOS versions are considered vulnerable?
 
-| EOS Version | Status     |
-| ----------- | ---------- |
-|             | Vulnerable |
-|             | Fixed      |
+EOS Versions
+4.34.1F and below releases in the 4.34.x train
+4.33.4M and below releases in the 4.33.x train
+4.32.7M and below releases in the 4.32.x train
+4.31.8M and below releases in the 4.31.x train
+All releases prior to 4.31.x train
 
 ### What hardware products are affected?
 
-*
-*
-*
+Arista EOS-based products:
+710/710XP Series
+720D Series
+720XP/722XPM Series
+750X Series
+7010 Series
+7010X Series
+7020R Series
+7130 Series running EOS
+7150 Series
+7160 Series
+7170 Series
+7050X/X2/X3/X4 Series
+7060X/X2/X4/X5/X6 Series
+7250X Series
+7260X/X3 Series
+7280E/R/R2/R3 Series
+7300X/X3 Series
+7320X Series
+7358X4 Series
+7368X4 Series
+7388X5 Series
+7500E/R/R2/R3 Series
+7700R4 Series
+7800R3/R4 Series
+AWE 5000 Series
+AWE 7200R Series
+CloudEOS
+cEOS-lab
+vEOS-lab
+CloudVision eXchange, virtual or physical appliance
+
 
 ### Does exploitation require a specific configuration?
 
 * [ ] Yes
-* [ ] No
+Yes, only specific configuration is vulnerable. 
 
 **If yes, what configuration is required?**
 
-*
+* If OSFPv3 is not configured there is no exposure to this issue and the show command will not produce any output.
 *
 
 ### What network protocol is mentioned in the advisory?
 
-*
+*OSFP
 
 ### Does the advisory provide mitigation or remediation guidance?
 
