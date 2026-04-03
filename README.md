@@ -69,7 +69,8 @@ Aruba produces enterprise networking devices, mainly:
 
 ### Advisory Link
 
-* Add the Aruba advisory URL here
+* [Add the Aruba advisory URL here](https://support.hpe.com/hpesc/public/docDisplay?docId=hpesbnw05027en_us&docLocale=en_US)
+  
 
 ### Does this advisory cover one or multiple CVEs?
 
@@ -77,8 +78,11 @@ Aruba produces enterprise networking devices, mainly:
 
 ### Identified CVEs
 
-* CVE-________
-* CVE-________
+* CVE-2026 23813
+* CVE-2026 23814
+* CVE-2026 23815
+* CVE-2026 23816
+
 
 ### Affected Operating Systems and Versions
 
